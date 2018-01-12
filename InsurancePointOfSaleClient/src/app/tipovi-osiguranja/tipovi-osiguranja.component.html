@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-sm-6" *ngFor="let tipOsiguranja of tipoviOsiguranja">
+      <div class="card">
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap" style="width:100%">
+          <div class="container">
+            <h4 class="card-title"><b>{{tipOsiguranja?.naziv}}</b></h4> 
+            <p>Ovo je opis osiguranja koje je ponudjeno na prodaju.</p>
+            <app-osiguranje-modal [childData] = "tipOsiguranja"></app-osiguranje-modal> 
+          </div>
+        </div>
+  </div>
+</div>
+
