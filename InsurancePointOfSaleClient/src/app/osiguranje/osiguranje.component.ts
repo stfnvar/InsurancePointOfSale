@@ -144,6 +144,7 @@ export class OsiguranjeComponent implements OnInit {
     });
     this.osiguranjeService.postOsiguranje(this.osiguranje,this.tipOsiguranja.id);
     this.modalRef.hide();
+    this.osiguranje.vrednostiAtributaOsiguranja = new Array();
   }
 
   enteredValue($event,tipAtributa: TipAtributa,index: number){
