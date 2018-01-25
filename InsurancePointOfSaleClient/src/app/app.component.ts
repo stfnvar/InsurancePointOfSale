@@ -3,6 +3,9 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { OsiguravajucaKuca } from './shared/OsiguravajucaKuca';
 import { OsiguracajucaKucaService } from './services/osiguracajuca-kuca.service';
 
+import { User } from './shared/user';
+import { KeycloakService } from './services/keycloak.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,12 +14,14 @@ import { OsiguracajucaKucaService } from './services/osiguracajuca-kuca.service'
 export class AppComponent implements OnInit{
   
   osiguravajucaKuca: OsiguravajucaKuca;
+  profile: User;
 
-  constructor(private osiguravajucaKuceService: OsiguracajucaKucaService) {
+  constructor(private osiguravajucaKuceService: OsiguracajucaKucaService, private keycloakService: KeycloakService) {
     this.getTipoviOsiguranja();
   }
 
   ngOnInit() {
+    this.profile = this.keycloakService.getUser();
   }
 
   getTipoviOsiguranja(){
@@ -24,4 +29,11 @@ export class AppComponent implements OnInit{
       .then(osiguravajucaKuca => this.osiguravajucaKuca = osiguravajucaKuca);
   }
 
+  public isAdmin(): boolean {
+    return this.keycloakService.hasRole('Prodavac');
+  }
+
+  public logout() {
+    this.keycloakService.logout();
+  }
 }

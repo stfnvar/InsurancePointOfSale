@@ -11,6 +11,8 @@ import { OsiguranjeService } from './services/osiguranje.service';
 import { TipOsiguranjaService } from './services/tip-osiguranja.service';
 import { OsiguranjeComponent } from './osiguranje/osiguranje.component';
 
+import { KeycloakHttp, KEYCLOAK_HTTP_PROVIDER } from './services/keycloak.http';
+import { KeycloakService } from './services/keycloak.service';
 
 @NgModule({
   declarations: [
@@ -27,8 +29,9 @@ import { OsiguranjeComponent } from './osiguranje/osiguranje.component';
   providers: [
     OsiguracajucaKucaService,
     OsiguranjeService,
-    TipOsiguranjaService
-  ],
+    TipOsiguranjaService,
+    KEYCLOAK_HTTP_PROVIDER,
+              KeycloakService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
