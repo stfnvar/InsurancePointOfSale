@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.config.DatabaseUri;
 import com.model.Osiguranje;
+import com.model.user.Permission;
 
 @RestController
 @RequestMapping("/api/osiguranja")
@@ -27,6 +28,7 @@ public class OsiguranjeController {
 	
 	@PostMapping("/{tipOsiguranjaId}")
 	@ResponseBody
+	@Permission(permissionName = "createOsiguranje1")
 	public Osiguranje createOsiguranje(@RequestBody Osiguranje osiguranje, @PathVariable("tipOsiguranjaId")Long tipOsiguranjaId) {
 		return restTemplate.postForObject(databaseUri.getDatabaseUri() + "/osiguranja/" + tipOsiguranjaId, osiguranje, Osiguranje.class);
 	}

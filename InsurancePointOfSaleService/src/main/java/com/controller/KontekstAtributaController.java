@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.config.DatabaseUri;
 import com.model.OsiguravajucaKuca;
+import com.model.user.Permission;
 
 @RestController
 @RequestMapping("/api/kontekstiAtributa")
@@ -29,6 +30,7 @@ public class KontekstAtributaController {
 	@SuppressWarnings("unchecked")
 	@GetMapping("/zaTipOsiguranja/{tipOsiguranjaId}")
 	@ResponseBody
+	@Permission(permissionName = "readOsiguravajuceKuce")
 	public List<OsiguravajucaKuca> getOsiguravajuceKuce(@PathVariable("tipOsiguranjaId") Long tipOsiguranjaId) {
 		return restTemplate.getForObject(databaseUri.getDatabaseUri() + "/kontekstiAtributa/zaTipOsiguranja/" + tipOsiguranjaId, List.class);
 	}

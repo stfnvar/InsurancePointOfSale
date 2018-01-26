@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.config.DatabaseUri;
 import com.model.OsiguravajucaKuca;
+import com.model.user.Permission;
 
 @CrossOrigin
 @RestController
@@ -31,6 +32,7 @@ public class OsiguravajucaKucaController {
 		
 	@GetMapping
 	@ResponseBody
+	@Permission(permissionName = "readOsiguravajucaKuca")
 	public OsiguravajucaKuca getOsiguravajucaKuca(){
 		return restTemplate.getForObject(databaseUri.getDatabaseUri() + "osiguravajuceKuce/"+osiguravajucaKucaId, OsiguravajucaKuca.class);
 	}

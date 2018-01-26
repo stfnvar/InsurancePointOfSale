@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.config.DatabaseUri;
 import com.model.PredefinisanaVrednost;
+import com.model.user.Permission;
 
 @RestController
 @RequestMapping("/api/predefinisaneVrednosti")
@@ -29,6 +30,7 @@ public class PredefinisanaVrednostController {
 	@GetMapping
 	@SuppressWarnings("unchecked")
 	@ResponseBody
+	@Permission(permissionName = "readPredefinisaneVrednosti1")
 	public List<PredefinisanaVrednost> getPredefinisanaVrednost(){
 		return restTemplate.getForObject(databaseUri.getDatabaseUri() + "/predefinisaneVrednosti", List.class);
 	}
@@ -36,6 +38,7 @@ public class PredefinisanaVrednostController {
 	@GetMapping("/zaTipAtributa/{tipAtributaId}")
 	@SuppressWarnings("unchecked")
 	@ResponseBody
+	@Permission(permissionName = "readPredefinisaneVrednostiZaTipAtributa1")
 	public List<PredefinisanaVrednost> getPredefinisanaVrednostiZaTipAtributa(@PathVariable ("tipAtributaId") Long tipAtributaId){
 		return restTemplate.getForObject(databaseUri.getDatabaseUri() + "/predefinisaneVrednosti/zaTipAtributa/" + tipAtributaId, List.class);
 	}

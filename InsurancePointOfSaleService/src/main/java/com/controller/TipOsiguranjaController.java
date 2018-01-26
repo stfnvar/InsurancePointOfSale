@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.config.DatabaseUri;
 import com.model.TipOsiguranja;
+import com.model.user.Permission;
 
 @RestController
 @RequestMapping("/api/tipoviOsiguranja")
@@ -32,6 +33,7 @@ public class TipOsiguranjaController {
 	@SuppressWarnings("unchecked")
 	@GetMapping
 	@ResponseBody
+	@Permission(permissionName = "readTipoviOsiguranja")
 	public List<TipOsiguranja> getTipoviOsiguranja(){
 		return restTemplate.getForObject(databaseUri.getDatabaseUri()+"/tipoviOsiguranja/zaOsiguravajucuKucu/" + osiguravajucaKucaId, List.class);
 	}

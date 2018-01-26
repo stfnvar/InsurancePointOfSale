@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.config.DatabaseUri;
 import com.model.TipAtributa;
+import com.model.user.Permission;
 
 @CrossOrigin
 @RestController
@@ -33,6 +34,7 @@ public class TipAtributaController {
 	@SuppressWarnings("unchecked")
 	@GetMapping("/zaTipOsiguranja/{tipOsiguranjaId}")
 	@ResponseBody
+	@Permission(permissionName = "readTipoviAtributaZaTipOsiguranja")
 	public List<TipAtributa> getTipoviAtributaZaTipOsiguranja(@PathVariable("tipOsiguranjaId") Long tipOsiguranjaId){
 		return restTemplate.getForObject(databaseUri.getDatabaseUri()+"/tipoviAtributa/zaTipOsiguranja/" + tipOsiguranjaId, List.class);
 	}
@@ -40,6 +42,7 @@ public class TipAtributaController {
 	@SuppressWarnings("unchecked")
 	@GetMapping("/zaKontekst/{kontekstAtributaId}")
 	@ResponseBody
+	@Permission(permissionName = "readTipoviAtributaZaKontekstAtributa")
 	public List<TipAtributa> getTipoviAtributaZaKontekstAtributa(@PathVariable("kontekstAtributaId") Long kontekstAtributaId){
 		return restTemplate.getForObject(databaseUri.getDatabaseUri()+"/tipoviAtributa/zaKontekst/" + kontekstAtributaId, List.class);
 	}

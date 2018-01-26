@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.config.DatabaseUri;
 import com.model.KontrolniAtribut;
+import com.model.user.Permission;
 
 @RestController
 @RequestMapping("/api/kontrolniAtributi")
@@ -26,6 +27,7 @@ public class KontrolniAtributController {
 	
 	@GetMapping("/zaKontekstAtributa/{kontekstAtributaId}")
 	@ResponseBody
+	@Permission(permissionName = "readAtributiZaKontekst")
 	public KontrolniAtribut getAtributiZaKontekst(@PathVariable("kontekstAtributaId")Long kontekstAtributaId) {
 		return restTemplate.getForObject(databaseUri.getDatabaseUri() + "/kontrolniAtributi/zaKontekstAtributa/" + kontekstAtributaId, KontrolniAtribut.class);
 	}
