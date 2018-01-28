@@ -44,7 +44,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 			for(String s : kat.getAccount().getRoles()){
 				ArrayList<String> lista = userRolesService.getPrivilegesForRole(s.replaceFirst("ROLE_", ""));
 				if(lista.contains(permission)){
-					log.error("ACCES GRANTED FOR USER: [{}], METHOD TYPE: [{}] ON PATH: [{}].", kat.getAccount().getPrincipal().getName(), request.getMethod(), request.getRequestURI());
+					log.info("ACCES GRANTED FOR USER: [{}], METHOD TYPE: [{}] ON PATH: [{}].", kat.getAccount().getPrincipal().getName(), request.getMethod(), request.getRequestURI());
 					return true;
 				}
 			}
@@ -53,6 +53,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 			response.sendError(401, "Unauthorized request");
 			return true;
 		}
+		
 		log.error("ACCES DENIED: [USER NOT LOGGED IN], METHOD TYPE [{}] ON PATH: [{}].", request.getMethod(), request.getRequestURI());
 		return true;
 	}
