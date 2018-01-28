@@ -36,4 +36,8 @@ export class AppComponent implements OnInit{
   public logout() {
     this.keycloakService.logout();
   }
+  
+  	public getUsername(): string {
+		return this.keycloakService.getUser().username;
+	}
 }
