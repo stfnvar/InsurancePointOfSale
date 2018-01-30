@@ -19,8 +19,11 @@ export class AppComponent implements OnInit{
   constructor(private osiguravajucaKuceService: OsiguracajucaKucaService, private keycloakService: KeycloakService) {
     this.getTipoviOsiguranja();
   }
-
   ngOnInit() {
+	if(this.keycloakService.hasRole('FinansijskiAnaliticar')){
+		//alert('Nemate pristup');
+		window.location.href = 'http://localhost:4200/';
+	}
     this.profile = this.keycloakService.getUser();
   }
 
@@ -29,7 +32,11 @@ export class AppComponent implements OnInit{
       .then(osiguravajucaKuca => this.osiguravajucaKuca = osiguravajucaKuca);
   }
 
-  public isAdmin(): boolean {
+    public isManager(): boolean {
+		return this.keycloakService.hasRole('FinansijskiAnaliticar');
+    }
+
+	public isAdmin(): boolean {
     return this.keycloakService.hasRole('Prodavac');
   }
 
